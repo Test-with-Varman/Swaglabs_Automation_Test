@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Swaglabs Sequential Test Suite" verbose="2">
+	<!-- 
+	Sequential Execution Suite
+	- All tests run sequentially (one after another)
+	- Best for: Debugging, stable execution, shared test data
+	- Execution Time: Longer (all tests run in sequence)
+	- Thread Count: 1 (Default)
+	-->
+
+	<!-- Test 1: Login Tests -->
+	<test name="Login Tests" preserve-order="true">
+		<classes>
+			<class name="testscripts.LoginTest" />
+		</classes>
+	</test>
+
+	<!-- Test 2: Product Page Tests -->
+	<test name="Product Page Tests" preserve-order="true">
+		<classes>
+			<class name="testscripts.ProductpageTest" />
+		</classes>
+	</test>
+
+	<!-- Test 3: Cart Page Tests -->
+	<test name="Cart Page Tests" preserve-order="true">
+		<classes>
+			<class name="testscripts.CartpageTest" />
+		</classes>
+	</test>
+
+	<!-- Test 4: Checkout Page Tests -->
+	<test name="Checkout Page Tests" preserve-order="true">
+		<classes>
+			<class name="testscripts.FInalCheckoutpageTest" />
+		</classes>
+	</test>
+
+	<!-- Test 5: Info Page Tests -->
+	<test name="Info Page Tests" preserve-order="true">
+		<classes>
+			<class name="testscripts.infopageTest" />
+		</classes>
+	</test>
+
+	<!-- Test 6: End-to-End Tests -->
+	<test name="End-to-End Tests" preserve-order="true">
+		<classes>
+			<class name="testscripts.EndtoEndTest" />
+		</classes>
+	</test>
+
+</suite>

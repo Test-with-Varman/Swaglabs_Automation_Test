@@ -1,0 +1,78 @@
+{
+  "checkoutData": [
+    {
+      "testCase": "TC01",
+      "firstName": "Keerthi",
+      "lastName": "Vasan",
+      "postalCode": "600001",
+      "expectedResult": "Success"
+    },
+    {
+      "testCase": "TC02",
+      "firstName": "Rahul",
+      "lastName": "Kumar",
+      "postalCode": "560001",
+      "expectedResult": "Success"
+    },
+    {
+      "testCase": "TC03",
+      "firstName": "Anitha",
+      "lastName": "Reddy",
+      "postalCode": "500081",
+      "expectedResult": "Success"
+    },
+    {
+      "testCase": "TC04",
+      "firstName": "Arun",
+      "lastName": "Prakash",
+      "postalCode": "641001",
+      "expectedResult": "Success"
+    },
+    {
+      "testCase": "TC05",
+      "firstName": "Priya",
+      "lastName": "Sharma",
+      "postalCode": "110001",
+      "expectedResult": "Success"
+    },
+    {
+      "testCase": "TC06",
+      "firstName": "",
+      "lastName": "Vasan",
+      "postalCode": "600001",
+      "expectedResult": "Error",
+      "expectedMessage": "Error: First Name is required"
+    },
+    {
+      "testCase": "TC07",
+      "firstName": "Keerthi",
+      "lastName": "",
+      "postalCode": "600001",
+      "expectedResult": "Error",
+      "expectedMessage": "Error: Last Name is required"
+    },
+    {
+      "testCase": "TC08",
+      "firstName": "Keerthi",
+      "lastName": "Vasan",
+      "postalCode": "",
+      "expectedResult": "Error",
+      "expectedMessage": "Error: Postal Code is required"
+    },
+    {
+      "testCase": "TC09",
+      "firstName": "",
+      "lastName": "",
+      "postalCode": "",
+      "expectedResult": "Error",
+      "expectedMessage": "Error: First Name is required"
+    },
+    {
+      "testCase": "TC10",
+      "firstName": "12345",
+      "lastName": "@@@",
+      "postalCode": "ABCDE",
+      "expectedResult": "Success"
+    }
+  ]
+}
