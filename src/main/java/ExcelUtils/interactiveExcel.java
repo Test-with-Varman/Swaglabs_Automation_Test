@@ -1,6 +1,7 @@
 package ExcelUtils;
 
 import java.io.FileInputStream;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,7 +20,7 @@ public class interactiveExcel {
             if (excelStream != null) {
                 wb = WorkbookFactory.create(excelStream);
             } else {
-                String excelPath = System.getProperty("user.dir") + "\\src\\main\\java\\ExcelUtils\\swag.xlsx";
+                String excelPath = Paths.get(System.getProperty("user.dir"), "src", "main", "java", "ExcelUtils", "swag.xlsx").toString();
                 fileStream = new FileInputStream(excelPath);
                 wb = WorkbookFactory.create(fileStream);
             }

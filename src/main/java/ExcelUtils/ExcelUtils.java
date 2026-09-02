@@ -1,6 +1,7 @@
 package ExcelUtils;
 
 import java.io.FileInputStream;
+import java.nio.file.Paths;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -18,8 +19,8 @@ public class ExcelUtils {
 		if (excelStream != null) {
 			wb = WorkbookFactory.create(excelStream);
 		} else {
-			// Fallback to original path for backward compatibility
-			String excelPath = System.getProperty("user.dir") + "\\src\\main\\java\\ExcelUtils\\swag.xlsx";
+			// Fallback to original path for backward compatibility (use cross-platform Paths)
+			String excelPath = Paths.get(System.getProperty("user.dir"), "src", "main", "java", "ExcelUtils", "swag.xlsx").toString();
 			fileStream = new java.io.FileInputStream(excelPath);
 			wb = WorkbookFactory.create(fileStream);
 		}

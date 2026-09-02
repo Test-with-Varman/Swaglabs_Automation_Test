@@ -15,9 +15,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  */
 public class chromedriver {
 	public RemoteWebDriver setup() {
-		ChromeOptions option = new ChromeOptions();
-		option.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
-		option.addArguments("--guest");
+ 		ChromeOptions option = new ChromeOptions();
+ 		option.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
+ 		option.addArguments("--guest");
+		// Add headless mode and CI-friendly flags for GitHub Actions or other CI environments
+		option.addArguments("--headless");
+		option.addArguments("--no-sandbox");
+		option.addArguments("--disable-dev-shm-usage");
+		option.addArguments("--disable-gpu");
 		Map<String, Object> prefs = new HashMap<>();
 		prefs.put("credentials_enable_service", false);
 		prefs.put("profile.password_manager_enabled", false);
