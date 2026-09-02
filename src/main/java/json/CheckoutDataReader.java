@@ -1,7 +1,7 @@
 package json;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CheckoutDataReader {
 
 	private ObjectMapper objectMapper;
-	private static final String JSON_FILE_PATH = "src/main/java/json/data.json";
 
 	public CheckoutDataReader() {
 		this.objectMapper = new ObjectMapper();
@@ -43,10 +42,12 @@ public class CheckoutDataReader {
 	public List<CheckoutData> getAllCheckoutData() throws IOException {
 		List<CheckoutData> checkoutDataList = new ArrayList<>();
 
-		try {
-			// Read the JSON file
-			File jsonFile = new File(JSON_FILE_PATH);
-			JsonNode rootNode = objectMapper.readTree(jsonFile);
+		try (InputStream is = getClass().getClassLoader().getResourceAsStream("data.json")) {
+			if (is == null) {
+				throw new IOException("data.json not found on classpath");
+			}
+			// Read the JSON from classpath resource
+			JsonNode rootNode = objectMapper.readTree(is);
 
 			// Get the checkoutData array from JSON
 			JsonNode checkoutDataArray = rootNode.get("checkoutData");
@@ -63,8 +64,8 @@ public class CheckoutDataReader {
 			}
 
 		} catch (IOException e) {
-			System.out.println("✗ Error: Failed to read JSON file. Path: " + JSON_FILE_PATH);
-			throw new IOException("Unable to read checkout data from JSON file: " + e.getMessage(), e);
+			System.out.println("✗ Error: Failed to read JSON from classpath resource: data.json");
+			throw new IOException("Unable to read checkout data from JSON resource: " + e.getMessage(), e);
 		}
 
 		return checkoutDataList;

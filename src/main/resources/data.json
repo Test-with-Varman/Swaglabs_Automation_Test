@@ -1,0 +1,18 @@
+{
+  "checkoutData": [
+    {
+      "testCase": "TC01",
+      "firstName": "Keerthi",
+      "lastName": "Vasan",
+      "postalCode": "600001",
+      "expectedResult": "Success"
+    },
+    {
+      "testCase": "TC02",
+      "firstName": "Rahul",
+      "lastName": "Kumar",
+      "postalCode": "560001",
+      "expectedResult": "Success"
+    }
+  ]
+}

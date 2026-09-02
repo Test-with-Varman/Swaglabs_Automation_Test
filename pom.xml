@@ -51,6 +51,13 @@
 			<version>2.22.0</version>
 
 		</dependency>
+
+		<!-- WebDriverManager to manage browser driver binaries automatically -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.5.0</version>
+		</dependency>
 	</dependencies>
 
 	<!-- Build Configuration with Surefire Plugin for Test Execution -->

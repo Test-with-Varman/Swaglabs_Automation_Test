@@ -10,10 +10,19 @@ public class ExcelUtils {
 
 	public static Object[][] getTestData() throws Throwable {
 
-		String excelPath = System.getProperty("user.dir") + "\\src\\main\\java\\ExcelUtils\\swag.xlsx";
-		FileInputStream excel = new FileInputStream(excelPath);
+		// Try to load from classpath first (recommended location: src/test/resources/swag.xlsx)
+		Workbook wb = null;
+		java.io.InputStream excelStream = ExcelUtils.class.getClassLoader().getResourceAsStream("swag.xlsx");
+		java.io.FileInputStream fileStream = null;
 
-		Workbook wb = WorkbookFactory.create(excel);
+		if (excelStream != null) {
+			wb = WorkbookFactory.create(excelStream);
+		} else {
+			// Fallback to original path for backward compatibility
+			String excelPath = System.getProperty("user.dir") + "\\src\\main\\java\\ExcelUtils\\swag.xlsx";
+			fileStream = new java.io.FileInputStream(excelPath);
+			wb = WorkbookFactory.create(fileStream);
+		}
 		Sheet sheet = wb.getSheet("usercreds");
 
 		int lastrownum1 = sheet.getLastRowNum();
@@ -33,8 +42,12 @@ public class ExcelUtils {
 			data[i - 1][1] = universalPassword;
 		}
 
-		wb.close();
-		excel.close();
+		if (wb != null) {
+			wb.close();
+		}
+		if (fileStream != null) {
+			fileStream.close();
+		}
 
 		return data;
 	}

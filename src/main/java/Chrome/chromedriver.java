@@ -4,11 +4,15 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+/**
+ * Chrome driver setup using WebDriverManager to avoid manual binary management.
+ */
 public class chromedriver {
 	public RemoteWebDriver setup() {
 		ChromeOptions option = new ChromeOptions();
@@ -19,15 +23,14 @@ public class chromedriver {
 		prefs.put("profile.password_manager_enabled", false);
 		option.setExperimentalOption("prefs", prefs);
 
-		WebDriver dri = new ChromeDriver(option);
+		// Ensure chromedriver binary is available
+		WebDriverManager.chromedriver().setup();
 
-		RemoteWebDriver driver = (RemoteWebDriver) dri;
+		RemoteWebDriver driver = new ChromeDriver(option);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
 		return driver;
-		
-
 	}
 
 }

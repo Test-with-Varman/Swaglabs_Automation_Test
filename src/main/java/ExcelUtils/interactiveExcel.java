@@ -11,10 +11,22 @@ public class interactiveExcel {
 
     public static String[] getInteractiveUserData() throws Throwable {
         
-        String excelPath = System.getProperty("user.dir") + "\\src\\main\\java\\ExcelUtils\\swag.xlsx";
-        FileInputStream excel = new FileInputStream(excelPath);
-
-        Workbook wb = WorkbookFactory.create(excel);
+        // Try to load from classpath first (recommended location: src/test/resources/swag.xlsx)
+        java.io.InputStream excelStream = interactiveExcel.class.getClassLoader().getResourceAsStream("swag.xlsx");
+        java.io.FileInputStream fileStream = null;
+        Workbook wb = null;
+        try {
+            if (excelStream != null) {
+                wb = WorkbookFactory.create(excelStream);
+            } else {
+                String excelPath = System.getProperty("user.dir") + "\\src\\main\\java\\ExcelUtils\\swag.xlsx";
+                fileStream = new FileInputStream(excelPath);
+                wb = WorkbookFactory.create(fileStream);
+            }
+        } catch (Throwable t) {
+            // close opened streams below in finally
+            throw t;
+        }
         Sheet sheet = wb.getSheet("usercreds");
         DataFormatter formatter = new DataFormatter();
 
@@ -42,8 +54,8 @@ public class interactiveExcel {
         
         System.out.println(">>> Executing Test for: " + selectedUsername);
 
-        wb.close();
-        excel.close();
+        if (wb != null) wb.close();
+        if (fileStream != null) fileStream.close();
         
         return new String[] {selectedUsername, universalPassword};
     }

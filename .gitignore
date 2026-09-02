@@ -1,1 +1,17 @@
+## Maven
 /target/
+
+## Eclipse/IDE files
+.classpath
+.project
+.settings/
+
+## OS
+Thumbs.db
+.DS_Store
+
+## Logs
+*.log
+
+## Screenshots (keep or remove as you prefer)
+screenshots/
